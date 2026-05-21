@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkedIn Finder</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="finder-layout">
+
+  <!-- ── top nav ── -->
+  <nav class="finder-nav">
+    <a href="/" class="btn btn-ghost" style="padding:4px 10px;font-size:12px">← Back</a>
+    <span class="nav-title" id="navTitle">LinkedIn Poster Finder</span>
+    <a id="jobLink" href="#" target="_blank" class="btn btn-ghost" style="padding:4px 10px;font-size:11px">Open on Upwork ↗</a>
+  </nav>
+
+  <div class="finder-body">
+
+    <!-- ── left: job card ── -->
+    <aside class="job-card" id="jobCard">
+      <div style="color:var(--muted);font-size:13px">Loading job…</div>
+    </aside>
+
+    <!-- ── right: LLM panel ── -->
+    <div class="finder-panel">
+
+      <!-- controls -->
+      <div class="finder-controls">
+        <div class="field">
+          <label>Anthropic API Key</label>
+          <input type="password" id="apiKey" placeholder="sk-ant-… (or set ANTHROPIC_API_KEY env var)">
+        </div>
+        <button id="searchBtn" class="btn btn-purple" onclick="findPoster()" style="flex-shrink:0">
+          🔎 Find on LinkedIn
+        </button>
+      </div>
+
+      <!-- result area -->
+      <div class="result-area" id="resultArea">
+        <div class="placeholder-msg">
+          <div class="icon">🔗</div>
+          Enter your Anthropic API key and click <strong>Find on LinkedIn</strong>.<br>
+          The AI will analyze the job posting and suggest who to search for.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<script src="/static/finder.js"></script>
+</body>
+</html>

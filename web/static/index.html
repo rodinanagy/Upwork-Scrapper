@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upwork Scraper</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="layout">
+
+  <!-- ── sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-title">
+      <span class="logo">🔍</span> Upwork Scraper
+    </div>
+
+    <hr class="divider">
+
+    <div class="field">
+      <label>Keywords</label>
+      <input type="text" id="keywords" placeholder="e.g. python developer" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label>Max Jobs</label>
+      <input type="number" id="max_jobs" value="50" min="1" max="500">
+    </div>
+
+    <div class="field">
+      <label>Output File</label>
+      <input type="text" id="output" value="data/jobs.csv">
+    </div>
+
+    <hr class="divider">
+
+    <label class="checkbox-row">
+      <input type="checkbox" id="debug">
+      <span>Debug mode (dump first page DOM)</span>
+    </label>
+
+    <hr class="divider">
+
+    <div class="btn-row">
+      <button id="startBtn" class="btn btn-primary" onclick="startScrape()">▶ Start</button>
+      <button id="stopBtn"  class="btn btn-danger"  onclick="stopScrape()" disabled>■ Stop</button>
+    </div>
+
+    <div id="status" class="status-badge">
+      <span class="dot"></span><span id="statusText">Idle</span>
+    </div>
+  </aside>
+
+  <!-- ── main ── -->
+  <main class="main">
+    <div class="tab-bar">
+      <button class="tab active" onclick="showTab('logs', this)">Logs</button>
+      <button class="tab" onclick="showTab('results', this)">
+        Results <span id="badge" class="badge" style="display:none">0</span>
+      </button>
+    </div>
+
+    <!-- logs tab -->
+    <div id="tab-logs" class="tab-content active">
+      <div id="terminal" class="terminal"></div>
+    </div>
+
+    <!-- results tab -->
+    <div id="tab-results" class="tab-content">
+      <div class="toolbar">
+        <button class="btn btn-ghost" onclick="loadJobs()">↻ Refresh</button>
+        <a class="btn btn-ghost" href="/api/download" download="jobs.csv">⬇ Download CSV</a>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Budget</th>
+              <th>Type</th>
+              <th>Duration</th>
+              <th>Skills</th>
+              <th>Category</th>
+              <th>Proposals</th>
+              <th>Country</th>
+              <th>Spent</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="jobBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>
